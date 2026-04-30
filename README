@@ -1,0 +1,20 @@
+## ✅ Método instala Usando Winget:
+## Se você usa o gerenciador de pacotes nativo do Windows (Windows Package Manager):
+winget install k6.k6
+
+## Dependências necessárias para gerar o HTML:
+npm install -g k6-html-reporter
+
+## Instale dependências
+npm install puppeteer
+
+## Executar os testes:
+k6 run --summary-export=reports/summary.json tests/load/users.test.js
+
+## Gerar o relatório HTML:
+node generate-report.js
+
+## Dashboard do k6:
+web dashboard: http://127.0.0.1:5665
+$env:K6_WEB_DASHBOARD="true"
+k6 run script.js

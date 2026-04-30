@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>k6 Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Inter, Arial;
+    background: #0d1321;
+    color: #e6edf3;
+  }
+
+  header {
+    padding: 16px 24px;
+    background: #111827;
+    border-bottom: 1px solid #1f2937;
+    font-weight: 600;
+  }
+
+  .top-cards {
+    display: flex;
+    gap: 12px;
+    padding: 20px;
+  }
+
+  .card {
+    flex: 1;
+    background: #151c2f;
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .label {
+    font-size: 12px;
+    color: #9ca3af;
+  }
+
+  .value {
+    font-size: 22px;
+    margin-top: 6px;
+  }
+
+  .green { color: #22c55e; }
+  .blue { color: #38bdf8; }
+  .pink { color: #f472b6; }
+  .yellow { color: #facc15; }
+
+  .chart-container {
+    margin: 20px;
+    background: #151c2f;
+    border-radius: 10px;
+    padding: 20px;
+  }
+</style>
+</head>
+
+<body>
+
+<header>k6 - Performance Overview</header>
+
+<div class="top-cards">
+
+  <div class="card">
+    <div class="label">Iterations</div>
+    <div class="value green">90</div>
+  </div>
+
+  <div class="card">
+    <div class="label">HTTP Requests</div>
+    <div class="value blue">630</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Avg Duration</div>
+    <div class="value yellow">365.48 ms</div>
+  </div>
+
+  <div class="card">
+    <div class="label">P95 Duration</div>
+    <div class="value yellow">975.55 ms</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Failures</div>
+    <div class="value pink">14.29%</div>
+  </div>
+
+</div>
+
+<div class="chart-container">
+  <canvas id="chart"></canvas>
+</div>
+
+<script>
+  const ctx = document.getElementById('chart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Start','Middle','End'],
+      datasets: [
+        {
+          label: 'Requests',
+          data: [10, 50, 630],
+          borderColor: '#22c55e',
+          tension: 0.3
+        },
+        {
+          label: 'Duration',
+          data: [100, 200, 365.48],
+          borderColor: '#38bdf8',
+          tension: 0.3
+        },
+        {
+          label: 'Failures',
+          data: [0, 2, 14.29],
+          borderColor: '#f472b6',
+          tension: 0.3
+        }
+      ]
+    },
+    options: {
+      plugins: {
+        legend: {
+          labels: { color: '#e5e7eb' }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#9ca3af' }
+        },
+        y: {
+          ticks: { color: '#9ca3af' }
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
