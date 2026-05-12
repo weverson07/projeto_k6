@@ -1,5 +1,17 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
+import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
+
+// Gera relatório HTML após o teste
+
+const now = new Date().toISOString().replace(/[:.]/g, "-");
+const reportPath = `C:\\Users\\HP\\Documents\\k6\\reports\\Report-${now}.html`;
+
+export function handleSummary(data) {
+  return {
+    [reportPath]: htmlReport(data),
+  };
+}
 
 // STRESS TEST
 export const options = {
